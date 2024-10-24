@@ -23,3 +23,67 @@ export FIREWORKS_PONG_API_KEY="654321"
 ### Run
 
 > nerdctl compose -f docker-compose-local.yml up
+
+## Sample
+```
+
+  curl --request POST \                                                                                             ─╯
+  --url http://localhost:4001/fireworks/inference/v1/embeddings \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "input": "The quick brown fox jumped over the lazy dog",
+  "model": "nomic-ai/nomic-embed-text-v1.5",
+  "dimensions": 2
+}'
+```
+
+```
+
+  curl --request POST \
+  --url https://localhost:4001/fireworks/inference/v1/chat/completions \
+  --header 'Authorization: Bearer <token>' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "model": "accounts/fireworks/models/llama-v3p1-8b-instruct",
+  "messages": [
+    {
+      "role": "system",
+      "content": "<string>",
+      "name": "<string>"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "description": "<string>",
+        "name": "<string>",
+        "parameters": {
+          "type": "object",
+          "required": [
+            "<string>"
+          ],
+          "properties": {}
+        }
+      }
+    }
+  ],
+  "max_tokens": 123,
+  "prompt_truncate_len": 123,
+  "temperature": 1,
+  "top_p": 1,
+  "top_k": 50,
+  "frequency_penalty": 0,
+  "presence_penalty": 0,
+  "n": 1,
+  "stop": "<string>",
+  "response_format": {
+    "type": "json_object",
+    "schema": {}
+  },
+  "stream": false,
+  "context_length_exceeded_behavior": "truncate",
+  "user": "<string>"
+}'
+```
