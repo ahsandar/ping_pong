@@ -28,7 +28,7 @@ defmodule PingPong.Endpoint do
 
   # Handle incoming events, if the payload is the right shape, process the
   # events, otherwise return an error.
-  post "/fireworks/inference/v1/chats/completions" do
+  post "/fireworks/inference/v1/chat/completions" do
     {status, body} =
       case conn.body_params do
         %{"model" => _model, "messages" => _messages} = body -> Chat.fireworks(body)
@@ -55,6 +55,6 @@ defmodule PingPong.Endpoint do
   # A catchall route, 'match' will match no matter the request method,
   # so a response is always returned, even if there is no route to match.
   match _ do
-    send_resp(conn, 404, "oops... Nothing here :(")
+    send_resp(conn, 404, "oops... Nothing here :)")
   end
 end
