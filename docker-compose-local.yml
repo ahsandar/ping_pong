@@ -3,11 +3,11 @@ services:
     image: "darnahsan/ping_pong"
     container_name: "ping_pong"
     environment:
-      - FIREWORKS_PING_EMBEDDING_API=https://api.fireworks.ai/inference/v1/embeddings
-      - FIREWORKS_PING_CHAT_API=https://api.fireworks.ai/inference/v1/chat/completions
-      - FIREWORKS_PING_API_KEY=123456
-      - FIREWORKS_PONG_EMBEDDING_API=https://api.fireworks.ai/inference/v1/embeddings
-      - FIREWORKS_PONG_CHAT_API=https://api.fireworks.ai/inference/v1/chat/completions
-      - FIREWORKS_PONG_API_KEY=654321
+      - FIREWORKS_PING_EMBEDDING_API=${FIREWORKS_PING_EMBEDDING_API}
+      - FIREWORKS_PING_CHAT_API=${FIREWORKS_PING_CHAT_API}
+      - FIREWORKS_PING_API_KEY=${FIREWORKS_PING_API_KEY}
+      - FIREWORKS_PONG_EMBEDDING_API=${FIREWORKS_PONG_EMBEDDING_API}
+      - FIREWORKS_PONG_CHAT_API=${FIREWORKS_PONG_CHAT_API}
+      - FIREWORKS_PONG_API_KEY=${FIREWORKS_PONG_API_KEY}
     ports:
       - "4001:4001"

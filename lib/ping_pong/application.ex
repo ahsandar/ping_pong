@@ -15,7 +15,7 @@ defmodule PingPong.Application do
         plug: PingPong.Endpoint,
         options: [port: 4001]
       ),
-      {Cachex, name: :ping_pong}
+      {Cachex, name: PingPong.Utility.cachex()}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

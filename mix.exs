@@ -14,7 +14,7 @@ defmodule PingPong.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :plug_cowboy, :castore],
+      extra_applications: [:logger, :plug_cowboy, :castore, :retry],
       mod: {PingPong.Application, []}
     ]
   end
@@ -29,6 +29,7 @@ defmodule PingPong.MixProject do
       {:req, "~>0.5.0"},
       {:cachex, "~>4.0.2"},
       {:castore, "~> 1.0"},
+      {:retry, "~> 0.18"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
