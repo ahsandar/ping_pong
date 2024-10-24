@@ -1,0 +1,6 @@
+services:
+  ping_pong:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: darnahsan/ping_pong
