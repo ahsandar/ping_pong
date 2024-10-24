@@ -28,7 +28,6 @@ defmodule PingPong.MixProject do
       {:jason, "~>1.4.4"},
       {:req, "~>0.5.0"},
       {:cachex, "~>4.0.2"},
-      {:retry, "~>0.18.0"},
       {:castore, "~> 1.0"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
