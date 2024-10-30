@@ -2,6 +2,10 @@
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+This is a service to currently use FireworksAI API. FireworksAI gives 2 set of API keys that can be used to increase your rate limit. 
+You can extend to use anyother service as well as it only acts as a reverse request forwarding proxy
+
+Its build using plug cowboy and alternates between two endpoiints hence cowboys playing ping Pong
 
 ![Image](cowboy_ping_pong.jpeg)
 
