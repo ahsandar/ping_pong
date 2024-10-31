@@ -15,7 +15,8 @@ defmodule PingPong.Application do
         plug: PingPong.Endpoint,
         options: [port: 4001]
       ),
-      {Cachex, name: PingPong.Utility.cachex()}
+      {Cachex, name: PingPong.Utility.cachex()},
+      {PingPong.RateLimiter, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

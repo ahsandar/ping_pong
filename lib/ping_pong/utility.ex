@@ -6,6 +6,8 @@ defmodule PingPong.Utility do
 
   use Retry.Annotation
 
+  alias PingPong.RateLimiter, as: RateLimiter
+
   def cachex() do
     :ping_pong
   end
@@ -24,11 +26,16 @@ defmodule PingPong.Utility do
 
   @retry with: constant_backoff(100) |> Stream.take(1)
   def api_call(endpoint, key, body) do
+    RateLimiter.queue()
     response = Req.post!(endpoint, auth: {:bearer, key}, json: body)
 
     cond do
       response.status > 499 -> {:error, {response.status, response.body}}
       true -> {:ok, {response.status, response.body}}
     end
+  end
+
+  def datetime_iso8601() do
+    DateTime.utc_now() |> DateTime.to_iso8601()
   end
 end
