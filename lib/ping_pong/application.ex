@@ -16,7 +16,22 @@ defmodule PingPong.Application do
         options: [port: 4001]
       ),
       {Cachex, name: PingPong.Utility.cachex()},
-      {PingPong.RateLimiter, []}
+      Supervisor.child_spec(
+        {PingPong.RateLimiter,
+         %{
+           name: :fireworks_rate_limiter_chat,
+           rate_limit: System.get_env("FIREWORKS_RATE_LIMIT_CHAT")
+         }},
+        id: :fireworks_rate_limiter_chat
+      ),
+      Supervisor.child_spec(
+        {PingPong.RateLimiter,
+         %{
+           name: :fireworks_rate_limiter_embedding,
+           rate_limit: System.get_env("FIREWORKS_RATE_LIMIT_EMBEDDING")
+         }},
+        id: :fireworks_rate_limiter_embedding
+      )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

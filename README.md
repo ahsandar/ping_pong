@@ -91,3 +91,17 @@ export FIREWORKS_PONG_API_KEY="654321"
   "user": "<string>"
 }'
 ```
+> Load test rate limiter
+
+```
+  seq 1 50 | xargs -n1 -P50 curl --request POST \                                                                         ─╯
+  --url http://localhost:4001/fireworks/inference/v1/embeddings \
+  --header 'content-type: application/json' \
+  --data '{
+  "input": "The quick brown fox jumped over the lazy dog",
+  "model": "nomic-ai/nomic-embed-text-v1.5",
+  "dimensions": 2
+}'
+
+````
+`

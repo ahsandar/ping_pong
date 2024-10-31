@@ -14,7 +14,12 @@ defmodule PingPong.Embedding do
     Logger.info("#{ping_or_pong}")
 
     {_, response} =
-      Utility.api_call(config[:embedding_api], config[:api_key], body)
+      Utility.api_call(
+        config[:embedding_api],
+        config[:api_key],
+        body,
+        :fireworks_rate_limiter_embedding
+      )
 
     response
   end

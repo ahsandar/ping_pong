@@ -25,12 +25,13 @@ defmodule PingPong.Utility do
   end
 
   @retry with: constant_backoff(100) |> Stream.take(1)
-  def api_call(endpoint, key, body) do
-    RateLimiter.queue()
+  def api_call(endpoint, key, body, rate_limiter \\ :fireworks_rate_limit) do
+    {_, count} = Cachex.incr(:ping_pong, cachex_counter())
+    RateLimiter.queue(rate_limiter)
     response = Req.post!(endpoint, auth: {:bearer, key}, json: body)
 
     cond do
-      response.status > 499 -> {:error, {response.status, response.body}}
+      response.status > 410 -> {:error, {response.status, response.body}}
       true -> {:ok, {response.status, response.body}}
     end
   end
@@ -38,4 +39,6 @@ defmodule PingPong.Utility do
   def datetime_iso8601() do
     DateTime.utc_now() |> DateTime.to_iso8601()
   end
+
+  def cachex_counter(), do: "request_counter"
 end

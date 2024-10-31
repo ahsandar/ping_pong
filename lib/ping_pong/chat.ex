@@ -12,7 +12,10 @@ defmodule PingPong.Chat do
     config = Config.fireworks(ping_or_pong)
     Logger.info(config[:chat_api])
     Logger.info("#{ping_or_pong}")
-    {_, response} = Utility.api_call(config[:chat_api], config[:api_key], body)
+
+    {_, response} =
+      Utility.api_call(config[:chat_api], config[:api_key], body, :fireworks_rate_limiter_chat)
+
     response
   end
 end
