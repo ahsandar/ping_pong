@@ -11,7 +11,7 @@ defmodule PingPong.RateLimiter do
   end
 
   def init(config) do
-    Cachex.put(:ping_pong, @cachex_counter, 0)
+    Cachex.put(:ping_pong, Utility.cachex_counter(), 0)
 
     {:ok,
      %{
@@ -42,7 +42,7 @@ defmodule PingPong.RateLimiter do
     {:reply, :ok, state}
   end
 
-  def queue(name) do
-    GenServer.call(name, :control_rate_limit, :infinity)
+  def queue(name, timeout \\ :infinity) do
+    GenServer.call(name, :control_rate_limit, timeout)
   end
 end

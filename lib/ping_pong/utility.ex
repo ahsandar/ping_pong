@@ -25,9 +25,9 @@ defmodule PingPong.Utility do
   end
 
   @retry with: constant_backoff(100) |> Stream.take(1)
-  def api_call(endpoint, key, body, rate_limiter \\ :fireworks_rate_limit) do
-    {_, count} = Cachex.incr(:ping_pong, cachex_counter())
-    RateLimiter.queue(rate_limiter)
+  def api_call(endpoint, key, body, rate_limiter \\ :fireworks_rate_limit, timeout \\ 45_000) do
+    Cachex.incr(:ping_pong, cachex_counter())
+    RateLimiter.queue(rate_limiter, timeout)
     response = Req.post!(endpoint, auth: {:bearer, key}, json: body)
 
     cond do
