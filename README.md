@@ -108,5 +108,18 @@ export FIREWORKS_RATE_LIMIT_EMBEDDING="60"
   "dimensions": 2
 }'
 
-````
-`
+```
+
+### Tests
+
+To run the test suite:
+
+```bash
+mix test
+```
+
+To run tests with coverage report:
+
+```bash
+mix test --cover
+```
