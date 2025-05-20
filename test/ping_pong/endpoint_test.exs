@@ -23,10 +23,10 @@ defmodule PingPong.EndpointTest do
   end
 
   test "returns 422 for invalid chat completion request" do
-    conn = 
+    conn =
       conn(:post, "/fireworks/inference/v1/chat/completions", %{invalid: "payload"})
       |> put_req_header("content-type", "application/json")
-    
+
     conn = PingPong.Endpoint.call(conn, @opts)
 
     assert conn.state == :sent
@@ -35,10 +35,10 @@ defmodule PingPong.EndpointTest do
   end
 
   test "returns 422 for invalid embedding request" do
-    conn = 
+    conn =
       conn(:post, "/fireworks/inference/v1/embeddings", %{invalid: "payload"})
       |> put_req_header("content-type", "application/json")
-    
+
     conn = PingPong.Endpoint.call(conn, @opts)
 
     assert conn.state == :sent

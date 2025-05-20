@@ -16,11 +16,12 @@ defmodule PingPong.RateLimiterTest do
   test "queue respects rate limit" do
     # First request
     PingPong.RateLimiter.queue(:test_limiter)
-    
+
     # Measure the time for the second request
     start_time = System.monotonic_time(:millisecond)
     task = Task.async(fn -> PingPong.RateLimiter.queue(:test_limiter) end)
-    Task.await(task, 5000)  # Wait for the task to complete with a timeout
+    # Wait for the task to complete with a timeout
+    Task.await(task, 5000)
     end_time = System.monotonic_time(:millisecond) + 2000
     # With rate limit of 1/minute, we expect at least 1000ms delay
     time_diff = end_time - start_time
